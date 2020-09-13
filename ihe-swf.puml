@@ -1,0 +1,79 @@
+@startuml
+skinparam defaultFontName Segoe UI
+skinparam ArrowThickness 2.2
+'skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 1
+skinparam roundcorner 5
+skinparam maxmessagesize 60
+skinparam RectangleFontColor #black
+skinparam ActorBorderColor #skyblue
+skinparam ActorBackgroundColor #gray
+skinparam RectangleBackgroundColor #D1D8E0
+
+together {
+    
+rectangle HIS {
+    rectangle "Patient Registration ADT" as adt#9DC3E2{
+
+    }
+
+    rectangle "Order Entry/Placing" as orderentry#9DC3E2{
+        
+    }
+}
+
+rectangle RIS {
+    
+    rectangle "Order scheduling" as orderschedule#9DC3E2{
+        
+    }
+}
+
+
+    
+rectangle Modality {
+    rectangle "Image Acquisition" as imageacq#9DC3E2{
+        
+    }
+}
+}
+
+rectangle PACS {
+    rectangle "Image Management" as imagemgmt#9DC3E2{
+        
+    }
+
+    rectangle "Image Archive" as imagearchive#9DC3E2{
+        
+    }
+}
+
+
+    rectangle ReviewWorkstation {
+
+        rectangle "Image Review" as imagereview#9DC3E2{
+            
+        }
+        
+    }
+    
+actor "Referring Physician" as refphy #green
+actor "Patient" as patient #Orange
+actor "Radiologist" as radiologist #blue
+
+
+
+refphy .right.>patient : <<flow>> patient info
+patient .left.>adt: <<flow>>
+adt ..>orderentry: <<flow>> patient registration
+orderentry .down.>orderschedule: <<flow>> order
+orderschedule .down.>imageacq: <<flow>>
+imageacq .>imagemgmt: <<flow>> images
+imagemgmt .up.> imagearchive: <<flow>> images
+PACS ..[hidden]up.> ReviewWorkstation: <<flow>> images
+imagearchive .>imagereview: <<flow>> images
+imagereview ..>refphy : dianosis,notes,images
+imagereview .up.>radiologist: <<flow>>
+
+
+@enduml

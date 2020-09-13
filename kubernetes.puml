@@ -1,0 +1,132 @@
+@startuml
+'skinparam linetyp ortho
+skinparam Style strictuml
+skinparam defaultFontName Segoe UI
+skinparam DefaultFontSize 12
+'skinparam DefaultFontStyle bold
+skinparam ArrowThickness 2.2
+skinparam ArrowFontColor blue
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+
+
+
+'skinparam SequenceMessageAlignment center
+actor actor
+participant "API Server" as apiserver
+participant etcd
+participant Scheduler
+participant Kubelet
+participant Docker
+
+actor ->apiserver : Create Pod
+activate apiserver
+apiserver -> etcd : Write
+activate etcd
+apiserver <<-- etcd
+deactivate etcd
+actor <<--apiserver
+deactivate apiserver
+
+apiserver <-> Scheduler: watch(new pod) for changes
+activate Scheduler
+apiserver <- Scheduler: bind pod (Scheduler does is update the pod definition through the API server)
+activate apiserver
+apiserver ->etcd : write
+activate etcd
+apiserver <<--etcd 
+deactivate etcd
+apiserver -->> Scheduler
+deactivate Scheduler
+deactivate apiserver
+apiserver <->Kubelet : watch(bound pod) for changes
+activate Kubelet
+Kubelet -> Docker: docker run
+activate Docker
+Kubelet <<-- Docker
+deactivate Docker
+Kubelet->apiserver : Update pod status
+activate apiserver 
+apiserver ->etcd : write
+activate etcd
+apiserver <<-- etcd
+deactivate etcd
+apiserver -->>Kubelet
+deactivate Kubelet
+
+note left of apiserver
+API server’s watch mechanism
+end note
+
+
+@enduml
+
+@startuml
+
+'skinparam linetyp ortho
+skinparam Style strictuml
+skinparam defaultFontName Segoe UI
+skinparam DefaultFontSize 16
+'skinparam DefaultFontStyle bold
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+skinparam maxmessagesize 60
+skinparam SequenceMessageAlignment center
+actor actor
+
+rectangle Master {
+    database etcd {
+    
+    }
+    rectangle "API Server" as apiserver{
+
+    }
+    rectangle "Scheduler" as scheduler{
+        
+    }
+    rectangle "Controller Manager" as cmanager{
+        
+    }
+}
+
+together {
+rectangle "Node" as node1{
+    rectangle "Kubelet" as kubelet1{
+
+    }
+    rectangle "Docker" as docker1{
+        
+    }
+    rectangle "kube-proxy" as Kubeproxy1{
+        
+    }
+    
+}
+rectangle "Node" as node2{
+    rectangle "Kubelet" as kubelet2{
+
+    }
+    rectangle "Docker" as docker2{
+        
+    }
+    rectangle "kube-proxy" as Kubeproxy2{
+        
+    }
+    
+}
+}
+etcd <-- apiserver
+scheduler -->apiserver
+cmanager -->apiserver
+actor -right->apiserver
+
+kubelet1 ->docker1
+apiserver <--kubelet1
+
+kubelet2 ->docker2
+apiserver <-up- kubelet2
+
+@enduml

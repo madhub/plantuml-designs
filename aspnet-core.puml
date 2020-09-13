@@ -1,0 +1,41 @@
+@startuml
+
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+skinparam maxmessagesize 60
+skinparam SequenceMessageAlignment center
+
+
+title "Keeping element togther"
+actor User
+[Third party application] as ThirdPartyApp
+
+/' Try to keep PostgresDB and Mail together,
+   so they are at the same level in the diagram. '/
+together {
+    [PostgreSQL database] as PostgresDB <<Database>>
+    [Object Store] as ObjectStore <<ObjectStore>>
+}
+
+package "ASP.NET Core Application" {
+    [Controllers] <<ASP.Net Core REST controllers>>
+    [Service] <<Service>>
+    [Repository] <<Repository>>
+}
+
+User --> Controllers
+ThirdPartyApp --> Controllers
+
+Controllers --> Service
+
+Service --> Repository
+Service --> ObjectStore
+
+Repository --> PostgresDB
+
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+skinparam maxmessagesize 60
+skinparam SequenceMessageAlignment center
+/' Set custom background colors for the default
+   component elements and the specific stereotypes. '/
+skinparam component {
+    BackgroundColor #ff6666
+    BackgroundColor<<Database>> #ccff66
+    BackgroundColor<<Spring service>> #66ccff
+    BackgroundColor<<Spring REST controllers>> #66ffcc
+    BackgroundColor<<Spring repository>> #66ffff
+    BackgroundColor<<Mail server>> #ffcc66
+}
+skinparam defaultFontName Segoe UI
+
+actor User
+[Third party application] as ThirdPartyApp
+
+
+together {
+    [PostgreSQL database] as PostgresDB <<Database>>
+    [Mail server] as Mail <<Mail server>>
+}
+
+package "Spring Boot Application" {
+    [APIController] <<Spring REST controllers>>
+    [AdminController] <<Spring REST controllers>>
+
+    [AdminService] <<Spring service>>
+    [DataStoreService] <<Spring service>>
+
+    [Repository] <<Spring repository>>
+}
+
+User --> AdminController
+ThirdPartyApp --> APIController
+
+APIController --> DataStoreService
+AdminController --> DataStoreService
+AdminController --> AdminService
+
+DataStoreService --> Repository
+AdminService --> Mail
+
+Repository --> PostgresDB
+
+@enduml
+
+@startuml
+
+title Line style & color
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+skinparam maxmessagesize 60
+skinparam SequenceMessageAlignment center
+' Make a dashed line, alternative syntax for ..>
+(*) -[dashed]-> "Write outline"
+
+' Make line bold and use color name
+"Write outline" -[bold,#green]-> "Find example"
+
+' Only change the color with hexadecimal RGB code
+"Find example" -[#ff00ff]-> "Write blog"
+
+' Order of line style and color can be reversed
+"Write blog" -[#6666ff,dashed]-> "Publish"
+
+' Use dotted line style
+"Publish" -[dotted]-> (*)
+
+@enduml

@@ -1,0 +1,76 @@
+@startuml
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+
+'skinparam monochrome true
+skinparam backgroundColor aliceblue
+caption <i><color:#700>Chain-of-responsibility</color></i>
+Actor -u- (Up)
+Actor -l- (Left)
+Actor -r- (Right)
+Actor -d- (Down)
+@enduml
+
+@startuml
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 5
+'skinparam maxmessagesize 60
+
+cloud {
+    [GitHub] as github
+}
+
+package "Local Machine" {
+    [nodejs] as scrape
+}
+
+package "GCP" {
+    database "Cloud Datastore" as datastore {
+        [entity]
+    }
+    
+    database "Cloud Storage" as gcs {
+        [bucket]
+    }
+
+    node "App Engine" {
+        frame "Standard" {
+            [indexer]
+            [web]
+        }
+        frame "Flexible" {
+            [syntax_checker]
+            [renderer]
+        }
+        database "TaskQueue" as taskqueue {
+            [index-create-queue] as queue
+        }
+        [Search API] as searchapi
+    }
+}
+
+actor User as user
+
+scrape --> github : 1. scraping
+scrape -r-> bucket : 2. put GitHub urls
+bucket -d-> indexer : 3. notification
+indexer -l-> queue : 4. put task
+queue -r-> indexer : 5. execute task
+indexer --> syntax_checker : 6. syntax check
+indexer --> renderer : 7. rendering
+indexer -u-> entity : 8. put
+web -u-> entity : 9. get
+web -d-> searchapi : 10. search
+web -r-> user : 11. show web page
+
+@enduml
