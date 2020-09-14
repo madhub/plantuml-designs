@@ -63,18 +63,8 @@ end note
 @enduml
 
 @startuml
+!include templates\stylesheet_murning.iuml
 
-'skinparam linetyp ortho
-skinparam Style strictuml
-skinparam defaultFontName Segoe UI
-skinparam DefaultFontSize 16
-'skinparam DefaultFontStyle bold
-skinparam ArrowThickness 2.2
-skinparam ArrowColor #gray
-skinparam sequenceArrowThickness 2
-skinparam roundcorner 5
-skinparam maxmessagesize 60
-skinparam SequenceMessageAlignment center
 actor actor
 
 rectangle Master {

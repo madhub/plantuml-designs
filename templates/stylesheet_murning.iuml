@@ -1,0 +1,102 @@
+@startuml
+
+!define COLOR_BACKG      #FFF8E1
+!define COLOR_HLIGHT     #F06292
+!define COLOR_PALETTE1_1 #C5E1A5
+!define COLOR_PALETTE1_2 #9CCC65
+!define COLOR_PALETTE1_3 #558B2F
+!define COLOR_PALETTE2_0 #ECEFF1
+!define COLOR_PALETTE2_1 #CFD8DC
+!define COLOR_PALETTE2_2 #90A4AE
+!define COLOR_PALETTE2_3 #546E7A
+!define COLOR_PALETTE3_1 #C5CAE9
+!define COLOR_PALETTE3_2 #9FA8DA
+!define COLOR_PALETTE3_3 #5C6BC0
+!define COLOR_PALETTE4_1 #FFE0B2
+!define COLOR_PALETTE4_2 #FFA726
+!define COLOR_PALETTE4_3 #FB8C00
+!define COLOR_PALETTE5_1 #E1BEE7
+!define COLOR_PALETTE5_2 #CE93D8
+!define COLOR_PALETTE5_3 #AB47BC
+
+hide circle
+hide empty methods
+hide stereotype
+skinparam dpi 150
+skinparam roundCorner 10
+skinparam shadowing false
+skinparam linetype ortho
+skinparam DefaultFontName Consolas
+skinparam ArrowFontColor COLOR_HLIGHT
+skinparam BackgroundColor COLOR_BACKG
+skinparam ArrowColor COLOR_HLIGHT
+skinparam ArrowThickness 2
+
+skinparam mindmap {
+  ArrowColor COLOR_HLIGHT
+  LineColor COLOR_HLIGHT
+}
+
+skinparam class {
+  FontStyle          bold
+  FontSize           12
+  BackgroundColor    COLOR_PALETTE1_1
+  BorderColor        COLOR_PALETTE1_2
+  FontColor          COLOR_PALETTE1_3
+  AttributeFontColor COLOR_PALETTE1_3
+}
+
+skinparam class<<other>> {
+  BackgroundColor    COLOR_PALETTE2_1
+  BorderColor        COLOR_PALETTE2_2
+  FontColor          COLOR_PALETTE2_3
+  AttributeFontColor COLOR_PALETTE2_3
+}
+
+skinparam class<<enum>> {
+  BackgroundColor    COLOR_PALETTE3_1
+  BorderColor        COLOR_PALETTE3_2
+  FontColor          COLOR_PALETTE3_3
+  AttributeFontColor COLOR_PALETTE3_3
+}
+
+skinparam class<<interface>> {
+  BackgroundColor    COLOR_PALETTE5_1
+  BorderColor        COLOR_PALETTE5_2
+  FontColor          COLOR_PALETTE5_3
+  AttributeFontColor COLOR_PALETTE5_3
+}
+
+skinparam activity{
+  StartColor             COLOR_HLIGHT
+  BackgroundColor        COLOR_PALETTE3_1
+  BorderColor            COLOR_PALETTE3_2
+  FontColor              COLOR_PALETTE3_3
+  DiamondBackgroundColor COLOR_PALETTE1_1
+  DiamondBorderColor     COLOR_PALETTE1_2
+  DiamondFontColor       COLOR_PALETTE1_3
+  BarColor               COLOR_HLIGHT
+  EndColor               COLOR_HLIGHT
+}
+
+skinparam note {
+  BackgroundColor    COLOR_PALETTE4_1
+  BorderColor        COLOR_PALETTE4_2
+  FontColor          COLOR_PALETTE4_3
+  AttributeFontColor COLOR_PALETTE4_3
+}
+
+skinparam rectangle<<Database>> {
+  BackgroundColor    COLOR_PALETTE2_0
+  BorderColor        COLOR_PALETTE2_1
+  FontColor          COLOR_PALETTE2_2
+  AttributeFontColor COLOR_PALETTE2_2
+}
+
+skinparam package {
+  BackgroundColor    COLOR_PALETTE2_1
+  BorderColor        COLOR_PALETTE2_1
+  FontColor          COLOR_PALETTE2_3
+}
+
+@enduml
