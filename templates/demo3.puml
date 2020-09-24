@@ -1,0 +1,60 @@
+@startuml
+
+' -- Deployment diagram --
+
+note as deployment #white
+= Deployment diagram
+just showing all the shapes here
+note that not all borders can be styled completely
+
+{{
+actor actor
+agent agent
+artifact artifact
+boundary boundary
+card card
+cloud cloud
+collections collections
+component component
+control control
+database database
+entity entity
+file file
+folder folder
+frame frame
+interface  interface
+node node
+package package
+queue queue
+stack stack
+rectangle rectangle
+storage storage
+usecase usecase
+}}
+end note
+
+@enduml
+
+@startuml
+note as a #White
+{{
+actor ax
+cloud cl
+queue queue
+stack stack
+rectangle rectangle
+storage storage
+}}
+
+end note
+rectangle abc [
+{{
+actor ax
+cloud cl
+queue queue
+stack stack
+rectangle rectangle
+storage storage
+}}
+]
+@enduml

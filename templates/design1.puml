@@ -1,4 +1,12 @@
 @startuml
+(bubble1)
+rectangle rect
+label simpleText
+bubble1 -> rect
+rect -> simpleText
+@enduml
+@startuml
+
  !include stylesheet_murning.iuml
 skinparam defaultFontName Segoe UI
 skinparam Style strictuml
