@@ -1,0 +1,248 @@
+@startuml
+note as a1c #white
+{{
+    cloud "External Systems" as es{
+        component "External Systems" as esc#LightYellow{
+
+        }
+    }
+    node "Business Logic Server" as bls{
+        frame "Windows Service Host" as wsh{
+            package "Ext Service" as es1{
+                component "Ext service" as es1comp#LightYellow{
+
+                }
+            }
+
+            package "GUI Service" as gui{
+                component "GUI service" as guic#LightYellow{
+
+                }
+            }
+        }
+
+    }
+    node "Client Computer" as cc{
+        package "Local Storage" as LocalStorage {
+            component "System Client" as scc#LightYellow{
+
+            }
+        }
+    }
+
+    node "Database Server" as dbs{
+        
+            database "DB" as db#LightYellow{
+
+            }
+        
+    }
+
+    node "Update Server" as us{
+        
+            package "Remote Storage" as rs{
+                component "System Storage" as ss#LightYellow{
+
+                }
+
+            }
+        
+    }
+esc -down->es1comp : WCF HTTP
+es1comp -down->guic : inproc
+scc -down->guic : WCF HTTP/TCP
+
+guic -down->db : SQL Access
+guic -down->ss : SMB
+
+}}
+end note
+
+note as ab1c #white
+{{
+
+    title
+            abc
+            xyx
+
+    end title
+skinparam note {
+BackgroundColor<<st1>> #white
+BorderColor<<st1>> #green
+FontColor<<st1>> #red
+shadowing false
+shadowing<<with>> true
+shadowing<<without>> false
+BackgroundColor<<st2>> #red
+}
+A -> B : msg
+note<<st1>> over A : text 1
+note over B #line:green;back:lightblue;shadowing:false : text 2
+note<<with>> over A : text 3
+note<<without>> over A : text 4
+}}
+end note
+
+note as abc #white
+{{
+    rectangle <size:120><&monitor></size> as p1#Orange{
+        
+    }
+    rectangle <size:120><&person></size> as p2#Orange{
+        
+    }
+    rectangle <size:120><&hard-drive></size> as p3#Orange{
+        
+    }
+    rectangle <size:120><&globe></size> as p4#Orange{
+        
+    }
+    card <size:120><&cloud></size> as p5#Orange{
+        
+    }
+    card <size:120><&cloud-upload></size> as p6#Orange{
+        
+    }
+    card <size:120><&cloud-download></size> as p7#Orange{
+        
+    }
+    card <size:120><&browser></size> as p8#Orange{
+        
+    }
+    card <size:120><&arrow-left></size> as p9#Orange{
+        
+    }
+    card <size:120><&arrow-thick-left></size> as p10#Orange{
+        
+    }
+
+    card <size:120><&document></size> as p11#Orange{
+        
+    }
+    card <size:120><&people></size> as p12#Orange{
+        
+    }
+
+    card <size:120><&arrow-circle-left></size> as p13#Orange{
+        
+    }
+    card <size:120><&circle-check></size> as p14#Orange{
+        
+    }
+}}
+end note
+@enduml
+
+@startuml
+
+note as abcd #white
+{{
+    left to right direction
+title  With "-" diagram grows horizonzally. With "--" vertically. It is general in PlantUML.
+class A
+Class B
+Class C
+Class D
+A <|- B
+B <|-- C
+C<|-- D
+note as one
+
+
+' table
+|= ColorName|= ColorName|
+|<#AliceBlue> AliceBlue |<#Beige> Beige |
+|<#AntiqueWhite> AntiqueWhite |<#Bisque> Bisque |
+end note
+}}
+end note
+
+skinparam defaultFontName Segoe UI
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam ArrowFontColor #blue
+skinparam roundcorner 5
+skinparam RectangleStereotypeFontColor #blue
+skinparam RoundCorner 10
+skinparam InterfaceFontColor red
+'skinparam linetype ortho
+' hide foot box
+
+actor actor
+agent agent
+artifact artifact
+boundary boundary
+card card
+cloud cloud
+component component
+control control
+database database
+entity entity
+file file
+folder folder
+frame frame
+interface  interface
+node node
+package package
+queue queue
+stack stack
+rectangle rectangle
+storage storage
+usecase usecase
+
+
+together {
+    component demo1{
+
+    }
+    component demo2{
+        
+    }
+}
+interface HTTP
+demo1 .up. HTTP
+
+demo1.[#blue,dashed,thickness=2].>demo2: change color & line thinkness
+
+
+@enduml
+
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam roundcorner 20
+skinparam maxmessagesize 60
+skinparam sequenceParticipant underline
+hide footbox
+box "Internal Service" #LightBlue
+
+caller -> server : conReq
+hnote over caller : idle
+caller <- server : conConf
+rnote over server
+ "r" as rectangle
+ "h" as hexagon
+endrnote
+end box
+@enduml
+
+@startuml
+artifact artifact1
+artifact artifact2
+artifact artifact3
+artifact artifact4
+artifact artifact5
+artifact artifact6
+artifact artifact7
+artifact artifact8
+artifact artifact9
+artifact artifact10
+artifact1 --> artifact2
+artifact1 --* artifact3
+artifact1 --o artifact4
+artifact1 --+ artifact5
+artifact1 --# artifact6
+artifact1 -->> artifact7
+artifact1 --0 artifact8
+artifact1 --^ artifact9
+artifact1 --(0 artifact10
+@enduml
