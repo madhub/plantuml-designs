@@ -1,5 +1,4 @@
 @startuml
-
 skinparam defaultFontName Segoe UI
 skinparam Style strictuml
 skinparam DefaultFontSize 16
@@ -9,6 +8,100 @@ skinparam sequenceArrowThickness 2
 skinparam roundcorner 5
 skinparam maxmessagesize 60
 skinparam SequenceMessageAlignment center
+note as two
+{{
+class foo
+foo --> bar
+foo -[bold]-> bar1
+foo -[dashed]-> bar2
+foo -[dotted]-> bar3
+
+
+
+}}
+end note
+component foo1
+component foo2
+foo1 <-0-> foo2
+foo1 <-(0- foo2
+
+' single line comment
+/'
+multiline comment
+'/
+center header
+<font color=red>Warning:</font>
+Do not use in production.
+endheader
+center footer "this is footer text"
+
+title
+ <u>Simple</u> communication example
+ on <i>several</i> lines and using <back:cadetblue>creole tags</back>
+end title
+[comp1] as abc #white;back:lightblue;line:green
+
+
+note as one #White
+{{
+rectangle "line.dashed" as fst1 #Azure;line.dashed 
+rectangle "line.dotted" as fst2 #Azure;line.dotted 
+rectangle "line.bold" as fst3 #Azure;line.bold
+package "line.bold" as fst4 #Azure;line.dashed
+(yellow) as abc #Azure;line.dashed
+' rectangle blahblah as bb  #line.dotted {
+'     rectangle "first3" as fst #77F;line.dashed {
+'         rectangle third #green;line.dashed
+'         rectangle fifth #line.bold
+'     }
+'     rectangle "second" as scnd
+'     fst -> scnd
+
+' }
+
+note as a1
+hello
+end note 
+
+note as a2
+hello from other
+end note 
+
+note left
+
+  #  This is **bold**
+  ##  This is //italics//
+  This is ""monospaced""
+  This is --stroked--
+  This is __underlined__
+  This is ~~waved~~
+  ----
+
+  <code>
+  This is **bold**
+  This is //italics//
+  This is ""monospaced""
+  This is --stroked--
+  This is __underlined__
+  This is ~~waved~~
+  --other test--
+  This is <U+221E> long
+  This is a <&code> icon
+</code>
+
+  * one
+  ** two
+  *** three
+legend
+  # Numbered list
+  # Second item
+  ## Sub item
+  ## Another sub item
+  # Third item
+end legend
+end note
+}}
+end note
 
 @enduml
 

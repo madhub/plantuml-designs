@@ -1,0 +1,87 @@
+@startuml
+skinparam defaultFontName Segoe UI
+skinparam Style strictuml
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam sequenceArrowThickness 2
+skinparam DefaultTextAlignment left
+skinparam roundcorner 10
+
+'skinparam maxmessagesize 60
+
+' using  hide stereotype & grouping the icons using card
+'icons can be shown as icon only by disabling the borderand background styles
+hide stereotype
+skinparam card<<only_icon>> {
+    BorderColor none
+    BackgroundColor none
+    Shadowing false
+}
+card "<size:50><&cloud></size>" as cloud <<only_icon>> {
+
+}
+card "<size:50><&person></size>" as person <<only_icon>>{
+
+}
+card "<color:#blue><size:50><&globe></size>" as globe <<only_icon>>{
+
+}
+card "<size:50><&browser></size>" as br <<only_icon>>{
+
+}
+card "<size:50><&monitor></size>" as monitor <<only_icon>>{
+
+}
+
+person -> br
+br ->cloud
+' multiline componet don;t use "as" while naming
+' object should be declared with [ ]
+component mmline [
+    line1
+    line2
+    ===
+    line3
+
+]
+note as demo 
+line1
+line2
+===
+line3
+# one
+## two
+# three
+end note
+
+' if you want to use the inline formating make sure to have external diag
+' contains some internal component
+package "abc" as abc1 #lightgreen;line.dotted {
+    rectangle internal #lightyellow;line.dotted{
+        rectangle abc {
+
+        }
+    }
+}
+' you can use hide keyword  to hide any object
+hide abc
+
+note as one #white
+{{
+rectangle "blahblah one more " as bb  #line.dotted {
+    rectangle "first3" as fst #77F;line.dashed {
+        rectangle third #red;line.dashed
+        (forth)
+        rectangle fifth #line.bold
+    }
+    rectangle "second" as scnd #line.dotted {
+        
+    }
+    fst -> scnd
+
+}
+}}
+end note
+
+@enduml

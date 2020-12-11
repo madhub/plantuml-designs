@@ -1,0 +1,45 @@
+@startuml xyz
+
+' Look and Feel helpers
+component abc {
+    
+}
+newpage
+
+class foo
+foo --> bar
+foo -[bold]-> bar1
+foo -[dashed]-> bar2
+foo -[dotted]-> bar3
+
+' More layout instructions
+' a -[hidden]L-> b
+' etc
+newpage
+skinparam linetype ortho
+skinparam groupInheritance 2
+
+abstract class Component
+
+class Leaf extends Component
+
+class Composite extends Component {
+Children [] : Component
+Add (Component)
+Remove (Component)
+}
+
+Composite --  Component : has >
+
+note as MyNote
+    This is the model viewer
+    and it is an observer
+    of the model
+    (presentation logic)
+  end note
+MainWindow -- MyNote
+AddObjectWindow -- MyNote
+newpage
+
+
+@enduml
