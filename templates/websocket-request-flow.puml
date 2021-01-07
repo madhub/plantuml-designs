@@ -1,0 +1,23 @@
+@startuml
+skinparam defaultFontName Segoe UI
+skinparam DefaultFontSize 16
+skinparam ArrowThickness 2.2
+skinparam ArrowColor #gray
+skinparam DefaultTextAlignment left
+skinparam roundcorner 10
+
+hide footbox
+participant client
+participant server
+
+' https://sahansera.dev/understanding-websockets-with-aspnetcore-5/
+client -[#Orange,thickness=10]-> server : **Opening Handshake**\nGET /ws-endpoint HTTP/1.1\nHost: example.com:80\nUpgrade: websocket\nConnection: Upgrade\nSec-WebSocket-Key: L4kHN+1Bx7zKbxsDbqgzHw==\nSec-WebSocket-Version: 13
+
+client <-[#Orange]- server : **Connection opened**\nHTTP/1.1 101 Switching Protocols
+client <-[#green]-> server : **Bidirectional messaging**\nex:0x00<UTF8-Payload> 0xff
+client <-[#red]-> server : **One side closes the connection** \nWebsocket close[FIN]
+
+
+
+
+@enduml

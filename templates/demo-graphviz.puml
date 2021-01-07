@@ -1,0 +1,64 @@
+@startuml
+
+digraph graphname{
+
+        bgcolor="#C6CFD532"; 
+        nodesep=1 
+        splines="line"
+        K=0.6;
+    ///// start Heroku styles
+    graph [fontname="helvetica",fontsize=14,pad=0.1,compound=true,color="grey60",fontcolor="grey10",fillcolor=grey95,style="filled"];
+    node [fontname="helvetica",fontsize=12,color=purple4,shape=box,style="rounded, filled",fontcolor=purple4,fillcolor=grey99,penwidth=1];
+    edge [fontname="helvetica",color=grey35,fontcolor=black,arrowhead="normal",penwidth=1,arrowsize=0.5];
+    ///// end Heroku styles
+
+        note [label="hello \n abc ",shape=note,fillcolor=yellow,style=filled ]    		
+        Headteacher:we ->note:e[rank="same" ]
+        Headteacher[ shape="record",label="{Headteacher|head}",fillColor=black]
+		Headteacher->{ Deputy1 Deputy2 BusinessManager} 
+		Deputy1->{rank=same; Teacher1 Teacher2}
+		BusinessManager->ITManager {rank=same; ITManager Teacher1 Teacher2}  // Put them on the same level
+
+
+
+    ' possible shapes box, polygon, ellipse, oval, circle, point, egg, triangle, 
+    ' plaintext, diamond, trapezium, parallelogram, house, pentagon, hexagon, 
+    ' septagon, octagon, doublecircle, doubleoctagon, tripleoctagon 
+    ' T [label="Teacher" color=Blue, fontcolor=Red, fontsize=24, shape=box]      // node T
+    ' P [label="Pupil" color=Blue, fontcolor=Red, fontsize=24, shape=box]  // node P
+    ' Q [label="Demo" color=Blue, fontcolor=Red, fontsize=24, shape=house]      // node T
+
+    ' T->P [label="Instructions", fontcolor=darkgreen] // edge T->P
+
+    ' subgraph cluster_level1 {
+    '     nodesep=0.5 // increases the separation between nodes
+		
+	' 	node [color=Red,fontname=Courier,shape=box] //All nodes will this shape and colour
+	' 	edge [color=Blue, style=dashed] //All the lines look like this
+
+	' 	Headteacher->{Deputy1 Deputy2 BusinessManager}
+	' 	Deputy1->{Teacher1 Teacher2}
+	' 	BusinessManager->ITManager
+	' 	{rank=same;ITManager Teacher1 Teacher2}  // Put them on the same level
+    ' }
+     
+
+}
+
+
+' digraph G {
+'   bgcolor=grey90
+'   'splines="line"
+'   compound=true; nodesep=1.0;
+'   subgraph cluster_A {
+'     a -> b; a -> c;
+'   }
+'   subgraph cluster_B {
+'     d -> e; f -> e;
+'   }
+'   a -> e:s [ ltail=cluster_A, lhead=cluster_B ];
+'   'node2 [fillcolor=yellow, style="diagonals,filled"]
+' }
+
+   
+@enduml
